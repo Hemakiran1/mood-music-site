@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Login Page Styles */
+        body.login-page {display: flex;flex-direction: column;justify-content: center;align-items: center;min-height: 100vh;margin: 0;background: linear-gradient(135deg, #c3dafe, #f0fff4);font-family: 'Poppins', sans-serif;}
+        .title {font-size: 28px;font-weight: 700;color: #4a5568;margin-bottom: 30px;text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.6);letter-spacing: 1px;}
+        .neumorphic-card {padding: 30px;border-radius: 25px;background: #e0e5ec;box-shadow:    10px 10px 25px #a3b1c6,    -10px -10px 25px #ffffff;width: 520px;}
+        .neumorphic-card h1 {text-align: center;color: #2d3748;font-size: 22px;margin-bottom: 20px;}
+        .neumorphic-input {width: 100%;padding: 14px;margin: 12px 0;border: none;border-radius: 15px;background: #e0e5ec;box-shadow:    inset 5px 5px 10px #a3b1c6,    inset -5px -5px 10px #ffffff;font-size: 15px;outline: none;color: #333;}
+        .neumorphic-button {width: 100%;padding: 14px;margin-top: 10px;border: none;border-radius: 15px;background: #e0e5ec;box-shadow:    5px 5px 10px #a3b1c6,    -5px -5px 10px #ffffff;font-size: 16px;font-weight: 500;color: #2d3748;cursor: pointer;transition: all 0.3s ease;}
+        .neumorphic-button:hover {background: #d9e2ec;color: #1a202c;}
+        .neumorphic-button:active {box-shadow:    inset 5px 5px 10px #a3b1c6,    inset -5px -5px 10px #ffffff;}
+        .error-message {color: #ff4757;text-align: center;margin-top: 10px;display: none;}
+        /* Music App Styles (hidden by default) */
+        .music-app {display: none;}
+        :root {--primary: #6c5ce7;--secondary: #a29bfe;--dark: #2d3436;--light: #f5f6fa;--text: #636e72;}
+        * {margin: 0;padding: 0;box-sizing: border-box;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;transition: all 0.3s ease;}
+        body.music-body {background-color: var(--light);color: var(--dark);}
+        body.music-body.dark-mode {background-color: var(--dark);color: var(--light);}
+        .container {max-width: 1200px;margin: 0 auto;padding: 20px;}
+        header {display: flex;justify-content: space-between;align-items: center;padding: 20px 0;border-bottom: 1px solid rgba(0, 0, 0, 0.1);}
+        body.music-body.dark-mode header {border-bottom: 1px solid rgba(255, 255, 255, 0.1);}
+        .logo {font-size: 28px;font-weight: 700;color: var(--primary);}
+        .logo span {color: var(--secondary);}
+        nav ul {display: flex;list-style: none;}
+        nav ul li {margin-left: 30px;}
+        nav ul li a {text-decoration: none;color: var(--text);font-weight: 500;}
+        body.music-body.dark-mode nav ul li a {color: var(--light);}
+        nav ul li a:hover {color: var(--primary);}
+        .theme-toggle {background: none;border: none;font-size: 20px;cursor: pointer;color: var(--text);}
+        body.music-body.dark-mode .theme-toggle {color: var(--light);}
+        .logout-btn {background: var(--primary);color: white;border: none;padding: 8px 16px;border-radius: 20px;cursor: pointer;font-weight: 500;margin-left: 20px;}
+        .logout-btn:hover {background: #5a4bd6;}
+        .hero {display: flex;align-items: center;padding: 60px 0;}
+        .hero-text {flex: 1;}
+        .hero-text h1 {font-size: 48px;margin-bottom: 20px;line-height: 1.2;}
+        .hero-text p {font-size: 18px;color: var(--text);margin-bottom: 30px;line-height: 1.6;}
+        body.music-body.dark-mode .hero-text p {color: #b2bec3;}
+        .btn {display: inline-block;padding: 12px 30px;background-color: var(--primary);color: white;border-radius: 30px;text-decoration: none;font-weight: 600;margin-right: 15px;}
+        .btn-outline {background: transparent;border: 2px solid var(--primary);color: var(--primary);}
+        body.music-body.dark-mode .btn-outline {color: var(--light);border-color: var(--light);}
+        .hero-image {flex: 1;text-align: center;}
+        .hero-image img {max-width: 100%;border-radius: 20px;box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);}
+        body.music-body.dark-mode .hero-image img {box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);}
+        .section-title {text-align: center;margin: 60px 0 40px;font-size: 36px;}
+        .artists {display: grid;grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));gap: 30px;margin-bottom: 60px;}
+        .artist-card {background-color: white;border-radius: 15px;overflow: hidden;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);text-align: center;padding-bottom: 20px;}
+        body.music-body.dark-mode .artist-card {background-color: #3d3d3d;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);}
+        .artist-card img {width: 100%;height: 250px;object-fit: cover;}
+        .artist-card h3 {margin: 15px 0 5px;font-size: 20px;}
+        .artist-card p {color: var(--text);margin-bottom: 15px;}
+        body.music-body.dark-mode .artist-card p {color: #b2bec3;}
+        .playlists {display: grid;grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));gap: 30px;margin-bottom: 60px;}
+        .playlist-card {background-color: white;border-radius: 15px;overflow: hidden;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);}
+        body.music-body.dark-mode .playlist-card {background-color: #3d3d3d;box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);}
+        .playlist-card img {width: 100%;height: 200px;object-fit: cover;}
+        .playlist-info {padding: 20px;}
+        .playlist-info h3 {margin-bottom: 10px;font-size: 20px;}
+        .playlist-info p {color: var(--text);margin-bottom: 15px;}
+        body.music-body.dark-mode .playlist-info p {color: #b2bec3;}
+        .playlist-stats {display: flex;justify-content: space-between;color: var(--text);font-size: 14px;}
+        body.music-body.dark-mode .playlist-stats {color: #b2bec3;}
+        .player {background-color: white;margin-top:20px; border-radius: 20px;padding: 15px;box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);display: flex;align-items: center;}
+        body.music-body.dark-mode .player {background-color: #3d3d3d;box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);}
+        .player-cover {width: 60px;height: 60px;border-radius: 10px;margin-right: 20px;}
+        .player-info {flex: 1;}
+        .player-info h4 {margin-bottom: 5px;}
+        .player-info p {color: var(--text);font-size: 14px;}
+        body.music-body.dark-mode .player-info p {color: #b2bec3;}
+        .player-controls {display: flex;align-items: center;gap: 20px;}
+        .player-controls button {background: none;border: none;font-size: 20px;cursor: pointer;color: var(--text);}
+        body.music-body.dark-mode .player-controls button {color: var(--light);}
+        .player-controls .play-pause {font-size: 30px;color: var(--primary);}
+        .progress-container {flex: 2;margin: 0 20px;}
+        .progress-bar {height: 5px;background-color: #ddd;border-radius: 5px;position: relative;cursor: pointer;}
+        body.music-body.dark-mode .progress-bar {background-color: #555;}
+        .progress {height: 100%;background-color: var(--primary);border-radius: 5px;width: 30%;}
+        .time {display: flex;justify-content: space-between;margin-top: 5px;font-size: 12px;color: var(--text);}
+        body.music-body.dark-mode .time {color: #b2bec3;}
+        footer {text-align: center;padding: 30px 0;margin-top: 60px;border-top: 1px solid rgba(0, 0, 0, 0.1);color: var(--text);}
+        body.music-body.dark-mode footer {border-top: 1px solid rgba(255, 255, 255, 0.1);}
+        .social-icons {margin: 20px 0;}
+        .social-icons a {color: var(--text);font-size: 20px;margin: 0 10px;}
+        body.music-body.dark-mode .social-icons a {color: var(--light);}
+        @media (max-width: 768px) {
+            .hero {    flex-direction: column;    text-align: center;}
+            .hero-text {    margin-bottom: 40px;}
+            nav ul {    display: none;}
+            .player {    flex-direction: column;    align-items: flex-start;}
+            .player-info {    margin: 10px 0;}
+            .progress-container {    width: 100%;    margin: 10px 0;}}
+        .play_list1,.play_list2,.play_list3{display: none;padding: 20px;}
+        .for_best_view{margin-top: 20px;display: flex;justify-content: space-evenly;align-items: center;}
+    </style>
+</head>
+
+
+<body class="login-page">
+
+    <!-- Login Page -->
+    <div id="login-page">
+        <div class="title">🎵 WELCOME TO Mood-Based Music 🎶</div>
+        <div class="neumorphic-card">
+            <h1>Login</h1>
+            <input type="email" id="email" class="neumorphic-input" placeholder="Email" required>
+            <input type="password" id="password" class="neumorphic-input" placeholder="Password" required>
+            <button id="login-btn" class="neumorphic-button">Sign in</button>
+            <div id="error-message" class="error-message">Invalid email or password</div>
+        </div>
+    </div>
+
+    <!-- Music App (hidden by default) -->
+    <div id="music-app" class="music-app">
+        <div class="container">
+            <header>
+                <div class="logo">Mood-Based<span>Music</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Playlists</a></li>
+                        <li><a href="#">About</a></li>
+                    </ul>
+                </nav>
+                <div>
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="logout-btn" id="logoutBtn">
+                        Logout <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </header>
+
+            <section class="hero">
+                <div class="hero-text">
+                    <h1>Stream Your Favorite Music Anytime, Anywhere</h1>
+                    <p>Discover millions of songs, curated playlists, and exclusive content from your favorite artists. Join Harmony Music today and experience music like never before.</p>
+                    <a href="#" class="btn">Start Free Trial</a>
+                    <a href="#" class="btn btn-outline">Learn More</a>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Music streaming">
+                </div>
+            </section>
+
+            <h2 class="section-title">Popular Playlists</h2>
+            <section class="playlists">
+                <div class="playlist-card" onclick="audio_playlist_control(1)">
+                    <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Playlist 1">
+                    <div class="playlist-info">
+                        <h3>HAPPY SONGS</h3>
+                        <p>The most popular songs right now</p>
+                        <div class="playlist-stats">
+                            <span>1k followers</span>
+                            <span>5 songs</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="playlist-card" onclick="audio_playlist_control(2)">
+                    <img src="https://images.unsplash.com/photo-1499415479124-43c32433a620?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1138&q=80" alt="Playlist 2">
+                    <div class="playlist-info">
+                        <h3>LOVE SONGS</h3>
+                        <p>Romantic melodies for the heart</p>
+                        <div class="playlist-stats">
+                            <span>1K followers</span>
+                            <span>5 songs</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="playlist-card" onclick="audio_playlist_control(3)">
+                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Playlist 3">
+                    <div class="playlist-info">
+                        <h3>PARTY SONGS</h3>
+                        <p>High-energy tracks to keep the party going</p>
+                        <div class="playlist-stats">
+                            <span>1k followers</span>
+                            <span>5 songs</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <div class="logo">Mood-Based<span>Music</span></div>
+                <p>&copy; 2023 Mood-Based. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+    <div class="play_list1">
+        <div class="player">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
+            <div class="player-info"><h4>Daavudi</h4><p>Devara(Telugu)</p></div>
+            <audio controls><source src="music/happy/Daavudi.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
+        </div>
+        <div class="player">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
+            <div class="player-info"><h4>Oy! Oy!</h4><p>OYE</p></div>
+            <audio controls><source src="music/happy/Oy! Oy!.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
+        </div>
+        <div class="player">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
+            <div class="player-info"><h4>Happy-3</h4><p>happy songs...</p></div>
+            <audio controls><source src="music1.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
+        </div>
+        <section class="playlists for_best_view">
+            <div class="playlist-card" onclick="audio_playlist_control(2)">
+                <img src="https://images.unsplash.com/photo-1499415479124-43c32433a620?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1138&q=80" alt="Playlist 2">
+                <div class="playlist-info">
+                    <h3>LOVE SONGS</h3>
+                    <p>Romantic melodies for the heart</p>
+                    <div class="playlist-stats">
+                        <span>1K followers</span>
+                        <span>5 songs</span>
+                    </div>
+                </div>
+            </div>
+            <div class="playlist-card" onclick="audio_playlist_control(3)">
+                <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Playlist 3">
+                <div class="playlist-info">
+                    <h3>PARTY SONGS</h3>
+                    <p>High-energy tracks to keep the party going</p>
+                    <div class="playlist-stats">
+                        <span>1k followers</span>
+                        <span>15 songs</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="play_list2">
+        <div class="player">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
+            <div class="player-info"><h4>Hoyna Hoyna</h4><p>Gang Leader(Telugu)</p></div>
+            <audio controls><source src="music/love/Hoyna Hoyna.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
+        </div>
+        <div class="player">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
+            <div class="player-info"><h4>Ninnu Chuse Anandamlo</h4><p>Gang Leader(Telugu)</p></div>
+            <audio controls><source src="music/love/Ninnu Chuse Anandamlo.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
+        </div>
+        <div class="player">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
+            <div class="player-info"><h4>Love-3</h4><p>love songs...</p></div>
+            <audio controls><source src="music1.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
+        </div>
+        <section class="playlists for_best_view">
+            <div class="playlist-card" onclick="audio_playlist_control(1)">
+                <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Playlist 1">
+                <div class="playlist-info">
+                    <h3>HAPPY SONGS</h3>
+                    <p>The most popular songs right now</p>
+                    <div class="playlist-stats">
+                        <span>1k followers</span>
+                        <span>5 songs</span>
+                    </div>
+                </div>
+            </div>
+            <div class="playlist-card" onclick="audio_playlist_control(3)">
+                <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Playlist 3">
+                <div class="playlist-info">
+                    <h3>PARTY SONGS</h3>
+                    <p>High-energy tracks to keep the party going</p>
+                    <div class="playlist-stats">
+                        <span>1k followers</span>
+                        <span>5 songs</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="play_list3">
+        <div class="player">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
+            <div class="player-info"><h4>Chikitu</h4><p>Coolie</p></div>
+            <audio controls><source src="music/party/Chikitu.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
+        </div>
+        <div class="player">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
+            <div class="player-info"><h4>Kurchi Madathapetti</h4><p>Guntur Kaaram</p></div>
+            <audio controls><source src="music/party/Kurchi Madathapetti.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
+        </div>
+        <div class="player">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
+            <div class="player-info"><h4>Party-3</h4><p>party songs...</p></div>
+            <audio controls><source src="music1.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
+        </div>
+        <section class="playlists for_best_view">
+            <div class="playlist-card" onclick="audio_playlist_control(1)">
+                <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Playlist 1">
+                <div class="playlist-info">
+                    <h3>HAPPY SONGS</h3>
+                    <p>The most popular songs right now</p>
+                    <div class="playlist-stats">
+                        <span>1k followers</span>
+                        <span>5 songs</span>
+                    </div>
+                </div>
+            </div>
+            <div class="playlist-card" onclick="audio_playlist_control(2)">
+                <img src="https://images.unsplash.com/photo-1499415479124-43c32433a620?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1138&q=80" alt="Playlist 2">
+                <div class="playlist-info">
+                    <h3>LOVE SONGS</h3>
+                    <p>Romantic Melodies for your heart</p>
+                    <div class="playlist-stats">
+                        <span>1k followers</span>
+                        <span>5 songs</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        // Login functionality
+        document.getElementById('login-btn').addEventListener('click', function() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('error-message');
+
+            // Simple validation (in a real app, you would check against a database)
+            if (email && password) {
+                // Hide error message if showing
+                errorMessage.style.display = 'none';
+
+                // Change body class to music-body
+                document.body.className = 'music-body';
+
+                // Hide login page and show music app
+                document.getElementById('login-page').style.display = 'none';
+                document.getElementById('music-app').style.display = 'block';
+            } else {
+                // Show error message
+                errorMessage.style.display = 'block';
+            }
+        });
+
+        // Music app functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+
+                if (body.classList.contains('dark-mode')) {
+                    themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                } else {
+                    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                }
+            });
+        }
+
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            // Reset to login page
+            document.body.className = 'login-page';
+            document.getElementById('login-page').style.display = 'block';
+            document.getElementById('music-app').style.display = 'none';
+            document.querySelector('.play_list1').style.display = 'none';
+            document.querySelector('.play_list2').style.display = 'none';
+            document.querySelector('.play_list3').style.display = 'none';
+            
+            // Clear form fields
+            document.getElementById('email').value = '';
+            document.getElementById('password').value = '';
+        });
+
+        // Playlist control function
+        const audio_playlist_control = (play_list_num) => {
+            console.log(play_list_num);
+            document.getElementById('login-page').style.display = 'none';
+            document.getElementById('music-app').style.display = 'none';
+            document.querySelector('.play_list1').style.display = 'none';
+            document.querySelector('.play_list2').style.display = 'none';
+            document.querySelector('.play_list3').style.display = 'none';
+
+            switch (play_list_num) {
+                case 1:
+                    document.querySelector('.play_list1').style.display = 'block';
+                    break;
+                case 2:
+                    document.querySelector('.play_list2').style.display = 'block';
+                    break;
+                case 3:
+                    document.querySelector('.play_list3').style.display = 'block';
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

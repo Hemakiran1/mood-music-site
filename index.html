@@ -95,6 +95,126 @@
             .progress-container {    width: 100%;    margin: 10px 0;}}
         .play_list1,.play_list2,.play_list3{display: none;padding: 20px;}
         .for_best_view{margin-top: 20px;display: flex;justify-content: space-evenly;align-items: center;}
+        .back-home-btn {
+            margin-bottom: 25px;
+            background-color: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 14px 28px;        /* Increased padding */
+            font-size: 18px;           /* Bigger font size */
+            font-weight: 600;          /* Bolder text */
+            border-radius: 30px;       /* More rounded corners */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .back-home-btn:hover {
+            background-color: #5a4bd6;
+        }
+        #audio-player-controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background-color: #222;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            font-family: 'Segoe UI', sans-serif;
+            z-index: 999;
+            box-shadow: 0 -3px 8px rgba(0,0,0,0.5);
+        }
+
+        #audio-player-controls .song-info {
+            flex: 1;
+            text-align: left;
+            font-size: 16px;
+            color: #f1f1f1;
+        }
+
+        #audio-player-controls .controls {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        #audio-player-controls .extra-controls {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        #repeatBtn.active {
+            color: yellow;
+        }
+
+        #audio-player-controls button {
+            font-size: 20px;
+            padding: 8px 14px;
+            border-radius: 6px;
+            background-color: white;
+            color: black;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, background-color 0.3s; 
+        }
+
+        #audio-player-controls button:hover {
+            transform: scale(1.1);
+            background-color: #e0e0e0;
+        }
+
+        #audio-player-controls input[type=range]{
+            cursor: pointer;
+            accent-color: #6c5ce7;
+        }
+
+        .custom-player {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f8f8f8;
+            border-radius: 12px;
+            padding: 12px 16px;
+            margin: 10px auto;
+            width: 90%;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+            min-height: 80px;
+        }
+
+        .custom-player img {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .player-info {
+            flex-grow: 1;
+            padding-left: 15px;
+        }
+
+        .player-info h4 {
+            font-size: 16px;
+            margin: 0;
+        }
+
+        .player-info p {
+            font-size: 13px;
+            color: #666;
+            margin: 4px 0 0;
+        }
+
+        .custom-player audio {
+            width: 180px;
+        }
     </style>
 </head>
 
@@ -186,26 +306,32 @@
 
             <footer>
                 <div class="logo">Mood-Based<span>Music</span></div>
-                <p>&copy; 2025 Mood-Based. All rights reserved.</p>
+                <p>&copy; 2023 Mood-Based. All rights reserved.</p>
             </footer>
         </div>
     </div>
 
     <div class="play_list1">
-        <div class="player">
+        <button class="back-home-btn" onclick="backToHome()">⬅️</button>
+        <div class="custom-player" onclick="playSong('music/happy/Daavudi.mp3', 'happy')">
             <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
             <div class="player-info"><h4>Daavudi</h4><p>Devara(Telugu)</p></div>
-            <audio controls><source src="music/happy/Daavudi.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
         </div>
-        <div class="player">
+        <div class="custom-player" onclick="playSong('music/happy/Oy!Oy!.mp3', 'happy')">
             <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
             <div class="player-info"><h4>Oy! Oy!</h4><p>OYE</p></div>
-            <audio controls><source src="music/happy/Oy!Oy!.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
         </div>
-        <div class="player">
+        <div class="custom-player" onclick="playSong('music/happy/Mr.Perfect.mp3', 'happy')">
             <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
             <div class="player-info"><h4>Mr.Perfect</h4><p>Araya 2</p></div>
-            <audio controls><source src="music/happy/Mr.Perfect.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
+        </div>
+         <div class="custom-player" onclick="playSong('music/happy/MyHeartIsBeating.mp3', 'happy')">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
+            <div class="player-info"><h4>My Heart Is Beating</h4><p>Jalsa</p></div>
+        </div>
+         <div class="custom-player" onclick="playSong('music/happy/Julayi.mp3', 'happy')">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
+            <div class="player-info"><h4>Julayi</h4><p>Julayi</p></div>
         </div>
         <section class="playlists for_best_view">
             <div class="playlist-card" onclick="audio_playlist_control(2)">
@@ -234,20 +360,26 @@
     </div>
 
     <div class="play_list2">
-        <div class="player">
+        <button class="back-home-btn" onclick="backToHome()">⬅️</button>
+        <div class="custom-player" onclick="playSong('music/love/HoynaHoyna.mp3', 'love')">
             <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
             <div class="player-info"><h4>Hoyna Hoyna</h4><p>Gang Leader(Telugu)</p></div>
-            <audio controls><source src="music/love/HoynaHoyna.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
         </div>
-        <div class="player">
+        <div class="custom-player" onclick="playSong('music/love/NinnuChuseAnandamlo.mp3', 'love')">
             <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
             <div class="player-info"><h4>Ninnu Chuse Anandamlo</h4><p>Gang Leader(Telugu)</p></div>
-            <audio controls><source src="music/love/NinnuChuseAnandamlo.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
         </div>
-        <div class="player">
+        <div class="custom-player" onclick="playSong('music/love/PuttenePrema.mp3', 'love')">
             <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
             <div class="player-info"><h4>Puttene Prema</h4><p>Gully Rowdy</p></div>
-            <audio controls><source src="music/love/PuttenePrema.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
+        </div>
+        <div class="custom-player" onclick="playSong('music/love/AkasamAmmayaithe.mp3', 'love')">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
+            <div class="player-info"><h4>Akasam Ammayaithe</h4><p>Gaabar Singh</p></div>
+        </div>
+        <div class="custom-player" onclick="playSong('music/love/Yemito.mp3', 'love')">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
+            <div class="player-info"><h4>Yemito</h4><p>Andala Rakshasi</p></div>
         </div>
         <section class="playlists for_best_view">
             <div class="playlist-card" onclick="audio_playlist_control(1)">
@@ -276,20 +408,26 @@
     </div>
 
     <div class="play_list3">
-        <div class="player">
+        <button class="back-home-btn" onclick="backToHome()">⬅️</button>
+        <div class="custom-player" onclick="playSong('music/party/Chikitu.mp3', 'party')">
             <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
             <div class="player-info"><h4>Chikitu</h4><p>Coolie</p></div>
-            <audio controls><source src="music/party/Chikitu.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
         </div>
-        <div class="player">
+        <div class="custom-player" onclick="playSong('music/party/KurchiMadathapetti.mp3', 'party')">
             <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
             <div class="player-info"><h4>Kurchi Madathapetti</h4><p>Guntur Kaaram</p></div>
-            <audio controls><source src="music/party/KurchiMadathapetti.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
         </div>
-        <div class="player">
+        <div class="custom-player" onclick="playSong('music/party/BeastMode.mp3', 'party')">
             <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
             <div class="player-info"><h4>Beast Mode</h4><p>Beast</p></div>
-            <audio controls><source src="music/party/BeastMode.mp3" type="audio/mpeg">Your browser does not support the audio element.</audio>
+        </div>
+        <div class="custom-player" onclick="playSong('music/party/FearSong.mp3', 'party')">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
+            <div class="player-info"><h4>Fear Song</h4><p>Devara</p></div>
+        </div>
+        <div class="custom-player" onclick="playSong('music/party/MassuMaranam.mp3', 'party')">
+            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Now Playing" class="player-cover">
+            <div class="player-info"><h4>Massu Maranam</h4><p>Petta</p></div>
         </div>
         <section class="playlists for_best_view">
             <div class="playlist-card" onclick="audio_playlist_control(1)">
@@ -316,6 +454,23 @@
             </div>
         </section>
     </div>
+    <div id="audio-player-controls" style="display: none;">
+      <div class="song-info">
+        <span id="currentSongName">No song playing</span>
+      </div>
+      <div class="controls">
+        <button id="prevBtn">⏮️</button>
+        <button id="playPauseBtn">▶️</button>
+        <button id="nextBtn">⏭️</button>
+      </div>
+      <input type="range" id="seekBar" value="0" min="0" max="100" step="1" style="flex: 2;">
+      <div class="extra-controls">
+        <button id="repeatBtn">🔁</button>
+        <button id="shuffleBtn">🔀</button>
+      </div>
+      <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1" style="width: 100px;">
+    </div>
+    <audio id ="globalAudio"></audio>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <script>
@@ -336,6 +491,7 @@
                 // Hide login page and show music app
                 document.getElementById('login-page').style.display = 'none';
                 document.getElementById('music-app').style.display = 'block';
+                document.getElementById('audio-player-controls').style.display='flex';
             } else {
                 // Show error message
                 errorMessage.style.display = 'block';
@@ -394,6 +550,143 @@
                     break;
             }
         }
+        function backToHome() {
+            document.querySelector('.play_list1').style.display = 'none';
+            document.querySelector('.play_list2').style.display = 'none';
+            document.querySelector('.play_list3').style.display = 'none';
+            document.getElementById('music-app').style.display = 'block';
+        }
+        // Connect buttons to functions
+        document.getElementById('nextBtn').addEventListener('click', playNext);
+        document.getElementById('prevBtn').addEventListener('click', playPrev);
+        document.getElementById('playPauseBtn').addEventListener('click', togglePlayPause);
+        document.getElementById('repeatBtn').addEventListener('click', toggleRepeat);
+        document.getElementById('shuffleBtn').addEventListener('click', shufflePlaylist);
+
+        const playlists = {
+            happy: [
+                'music/happy/Daavudi.mp3',
+                'music/happy/Oy!Oy!.mp3',
+                'music/happy/Mr.Perfect.mp3',
+                'music/happy/MyHeartIsBeating.mp3',
+                'music/happy/Julayi.mp3'
+            ],
+            love: [
+                'music/love/HoynaHoyna.mp3',
+                'music/love/NinnuChuseAnandamlo.mp3',
+                'music/love/PuttenePrema.mp3',
+                'music/love/AkasamAmmayaithe.mp3',
+                'music/love/Yemito.mp3'
+            ],
+            party: [
+                'music/party/BeastMode.mp3',
+                'music/party/Chikitu.mp3',
+                'music/party/KurchiMadathapetti.mp3',
+                'music/party/FearSong.mp3',
+                'music/party/MassuMaranam.mp3'
+            ]
+        };
+
+        let currentPlaylist = [];
+        let currentIndex = -1;
+        let isRepeat = false;
+        const audio = document.getElementById('globalAudio');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const currentSongName = document.getElementById('currentSongName');
+        const repeatBtn = document.getElementById('repeatBtn');
+
+// Helper: Get filename without extension
+        function getSongName(src) {
+            return src.split('/').pop().replace('.mp3', '').replace(/[_-]/g, ' ');
+        }
+
+        function playSong(src, mood = null) {
+            if (mood) {
+                currentPlaylist = [...playlists[mood]];
+            }
+
+            currentIndex = currentPlaylist.indexOf(src);
+            if (currentIndex === -1) return;
+
+            audio.src = src;
+            audio.play();
+            audio.style.display = 'block';
+            playPauseBtn.innerText = '⏸️';
+            currentSongName.textContent = "🎵 " + getSongName(src);
+        }
+
+        function togglePlayPause() {
+            if (!audio.src) return;
+
+            if (audio.paused) {
+                audio.play();
+                playPauseBtn.innerText = '⏸️';
+            } else {
+                audio.pause();
+                playPauseBtn.innerText = '▶️';
+            }
+        }
+
+        function playNext() {
+            if (currentIndex === -1 || currentPlaylist.length === 0) return;
+            currentIndex = (currentIndex + 1) % currentPlaylist.length;
+            playSong(currentPlaylist[currentIndex]);
+        }
+
+        function playPrev() {
+            if (currentIndex === -1 || currentPlaylist.length === 0) return;
+            currentIndex = (currentIndex - 1 + currentPlaylist.length) % currentPlaylist.length;
+            playSong(currentPlaylist[currentIndex]);
+        }
+
+        function toggleRepeat() {
+            isRepeat = !isRepeat;
+            repeatBtn.classList.toggle('active',isRepeat);
+        }
+
+        function shufflePlaylist() {
+            if (currentPlaylist.length === 0) return;
+
+            for (let i = currentPlaylist.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [currentPlaylist[i], currentPlaylist[j]] = [currentPlaylist[j], currentPlaylist[i]];
+            }
+
+            currentIndex = 0;
+            playSong(currentPlaylist[currentIndex]);
+        }
+
+        audio.addEventListener('ended', () => {
+            if (isRepeat) {
+                audio.currentTime = 0;
+                audio.play();
+            } else {
+                playNext();
+            }
+        });
+        
+        const volumeSlider = document.getElementById('volumeSlider');
+        volumeSlider.addEventListener('input',() => {
+            audio.volume = volumeSlider.value;
+        });
+        
+        const seekBar = document.getElementById('seekBar');
+
+// Update progress bar as song plays
+        audio.addEventListener('timeupdate', () => {
+            if (!isNaN(audio.duration)) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                seekBar.value = progress;
+            }
+        });
+
+// Seek when user moves the slider
+        seekBar.addEventListener('input', () => {
+            if (!isNaN(audio.duration)) {
+                const seekTo = (seekBar.value / 100) * audio.duration;
+                audio.currentTime = seekTo;
+            }
+        });
     </script>
 </body>
 </html>
